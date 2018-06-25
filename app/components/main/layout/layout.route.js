@@ -10,7 +10,7 @@ function Layout($stateProvider) {
             controller: 'LayoutController',
             controllerAs: 'vm',
             ncyBreadcrumb: {
-                label: 'HOME'
+                label: 'Control Page'
             }
         });
 }

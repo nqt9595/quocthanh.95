@@ -23,6 +23,13 @@
         client2.onMessageArrived = onMessageArrived2;
         vm.zone1Default = [
             {
+                type: "Rau Cải",
+                highTemp: 20,
+                lowTemp: 15,
+                highHud: 80,
+                lowHud: 70
+            },
+            {
                 type: "Xà Lách",
                 highTemp: 25,
                 lowTemp: 15,
@@ -30,53 +37,22 @@
                 lowHud: 70
             },
             {
-                type: "Bó Xôi",
-                highTemp: 20,
-                lowTemp: 15,
-                highHud: 80,
-                lowHud: 70
-            },
-            {
-                type: "Cải Bắp",
+                type: "Rau Muống",
                 highTemp: 20,
                 lowTemp: 18,
                 highHud: 85,
                 lowHud: 75
             }
         ]
-        vm.zone2Default = [
-            {
-                type: "xalach",
-                highTemp: 25,
-                lowTemp: 15,
-                highHud: 80,
-                lowHud: 70
-            },
-            {
-                type: "boxoi",
-                highTemp: 20,
-                lowTemp: 15,
-                highHud: 80,
-                lowHud: 70
-            },
-            {
-                type: "caibap",
-                highTemp: 20,
-                lowTemp: 18,
-                highHud: 85,
-                lowHud: 75
-            }
-        ]
+       
         if (!$localStorage.zone1) {
             $localStorage.zone1 = vm.zone1Default;
         }
-        if (!$localStorage.zone2) {
-            $localStorage.zone2 = vm.zone2Default;
-        }
+        
         vm.zone1 = angular.copy($localStorage.zone1);
-        vm.zone2 = angular.copy($localStorage.zone2);
+       
         vm.item1 = vm.zone1[0];
-        vm.item2 = vm.zone2[0];
+       
         vm.send = send;
         var options = {
             useSSL: true,
@@ -85,20 +61,14 @@
             onSuccess: onConnect,
             onFailure: doFail
         }
-        var options2 = {
-            useSSL: true,
-            userName: "imhjhfju",
-            password: "WnoHeNJQQZjI",
-            onSuccess: onConnect2,
-            onFailure: doFail2
-        }
+       
         vm.zone1Change = zone1Change;
-        vm.zone2Change = zone2Change;
+       
         // connect the client
         client.connect(options);
-        client2.connect(options2);
+       
         vm.index1 = 0;
-        vm.index2 = 0;
+       
         // called when the client connects
         function onConnect() {
             // Once a connection has been made, make a subscription and send a message.
@@ -110,24 +80,12 @@
             });
         }
 
-        function onConnect2() {
-            // Once a connection has been made, make a subscription and send a message.
-            console.log("onConnect2");
-            client2.subscribe("event2");
-            $timeout(function () {
-                vm.connected2 = true;
-                vm.wait2 = false;
-            });
-        }
+      
 
         function doFail(e) {
             console.log(e);
         }
-        function doFail2(e) {
-            console.log(e);
-        }
-
-
+       
 
         function sendMessage(destination, message) {
             var message = new Paho.MQTT.Message(message);
@@ -135,11 +93,7 @@
             client.send(message);
         }
 
-        function sendMessage2(destination, message) {
-            var message = new Paho.MQTT.Message(message);
-            message.destinationName = destination;
-            client2.send(message);
-        }
+       
 
         // called when the client loses its connection
         function onConnectionLost(responseObject) {
@@ -147,11 +101,7 @@
                 console.log("onConnectionLost:" + responseObject.errorMessage);
             }
         }
-        function onConnectionLost2(responseObject) {
-            if (responseObject.errorCode !== 0) {
-                console.log("onConnectionLost2:" + responseObject.errorMessage);
-            }
-        }
+        
 
         // called when a message arrives
         function onMessageArrived(message) {
@@ -164,14 +114,7 @@
             }
         }
 
-        function onMessageArrived2(message) {
-            console.log("onMessageArrived2:" + message.payloadString);
-            if (message.destinationName == "event2") {
-                var data = message.payloadString;
-                vm.connected2 = true;
-                vm.wait2 = false;
-            }
-        }
+        
         function send(id) {
             if (id == 1) {
                 vm.zone1[vm.index1] = vm.item1;
@@ -197,13 +140,6 @@
                 vm.index1 = index;
             })
         }
-        function zone2Change(item) {
-            $timeout(function () {
-                vm.item2 = item;
-                var index = _.findIndex(vm.zone2, vm.item2)
-                vm.index2 = index;
-
-            })
-        }
+       
     }
 })();

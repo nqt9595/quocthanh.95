@@ -10,7 +10,7 @@
         <strong ng-show="vm.wait1">Vui lòng chờ...</strong>
         <br>
         <div>
-             <p style="background-color: #ff6666; color: #ffffff ">
+           
             
             <div class="panel panel-yellow">
                 <div class="panel-heading">CONTROL TABLE</div>
@@ -68,17 +68,16 @@
                                            <th>ÐÈN</th>
                                            <th>BƠM</th>
                                            <th>QUẠT</th>
-                                           <th>PHUN SUONG</th>
+                                           <th>PHUN SƯƠNG</th>
                                                                    
                                          </tr>
                                  
                                      </tbody>
-                                 
-                                
-                                   
+                                          </table>
+                                     <table border="1px">
+                                       <div class="panel-success">Trạng Thái/Điều Khiển</div>   
                                          <tr>       
-                                             <div class="panel-success">Trạng Thái/Điều Khiển</div>   
-                                               <td> <label class="switch">
+                                              <td> <label class="switch">
                                                             <input type="checkbox" ng-disabled="!vm.connected1 || vm.wait1 || !vm.manual_1" ng-checked="vm.light_1" ng-click="vm.light1Change()">
                                                              <div class="slider round"></div>
                                                            </label></td>
@@ -98,7 +97,7 @@
                                  </label></td>
                                                    
                                          </tr>
-                                  </p>
+                                
                                       <tbody>
                                 </thead>
                             </table>

@@ -59,10 +59,11 @@
                                              <th bgcolor="violet">ÐỘ ẨM ÐẤT</th>
                                              <td>{{vm.zone_1[2]}}</td>
                                          </tr>
-                                
+                                 </tbody>
                                         
-                                        
-                                       
+                                        </table>
+                                        <table border="1px">
+                                       <div class="panel-success">TRẠNG THÁI/ĐIỀU KHIỂN</div>   
                                         <tr bgcolor="yellow">
                                             
                                            <th>ÐÈN</th>
@@ -72,10 +73,9 @@
                                                                    
                                          </tr>
                                  
-                                     </tbody>
-                                          </table>
-                                     <table border="1px">
-                                       <div class="panel-success">TRẠNG THÁI/ĐIỀU KHIỂN</div>   
+                                    
+                                          
+                                    
                                          <tr>       
                                               <td> <label class="switch">
                                                             <input type="checkbox" ng-disabled="!vm.connected1 || vm.wait1 || !vm.manual_1" ng-checked="vm.light_1" ng-click="vm.light1Change()">
